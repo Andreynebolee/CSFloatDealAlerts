@@ -128,6 +128,19 @@
               </div>
             </div>
 
+            <div class="drops" id="drops" hidden>
+              <div class="drops-label"><b>Live</b>последние<br>находки</div>
+            </div>
+
+            <div class="legend" id="legend" hidden title="Цвет карточки показывает размер скидки, а не редкость предмета">
+              <span>Цвет = скидка:</span>
+              <span><i class="lg-blue"></i>до 10%</span>
+              <span><i class="lg-purple"></i>10%+</span>
+              <span><i class="lg-pink"></i>15%+</span>
+              <span><i class="lg-red"></i>20%+</span>
+              <span><i class="lg-gold"></i>30%+ джекпот</span>
+            </div>
+
             <div id="dealsEmpty" class="empty-state">
               <div class="radar" id="emptyArt"><i></i><i></i><i></i><svg class="ico"><use href="#i-bolt"/></svg></div>
               <h2 id="emptyTitle">Пока пусто</h2>
@@ -170,6 +183,8 @@
                 <div class="pnl-cell"><span>В портфеле</span><b id="pnlHolding">$0.00</b></div>
                 <div class="pnl-cell"><span>Выручка</span><b id="pnlRevenue">$0.00</b></div>
                 <div class="pnl-cell"><span>Позиций</span><b id="pnlCount">0</b></div>
+                <div class="pnl-cell"><span>Лучшая сделка</span><b id="pnlBest">—</b></div>
+                <div class="pnl-cell"><span>В плюс</span><b id="pnlWinrate">—</b></div>
               </div>
             </div>
 
@@ -439,7 +454,7 @@
 
                   <div class="card about">
                     <h2>О проекте</h2>
-                    <p class="hint">CSFloat Deal Alerts — бесплатное приложение. Работает локально: ключ CSFloat уходит только на CSFloat, а токен бота — только в Telegram, и только если вы включили дубль.</p>
+                    <p class="hint">Программа бесплатная и работает у вас на компьютере. Ключ CSFloat уходит только на CSFloat, а токен бота — только в Telegram, и то если вы его включили.</p>
                     <div class="about-row">
                       <span class="muted" id="aboutVersion"></span>
                       <button id="aboutSupportBtn" class="btn" hidden><svg class="ico"><use href="#i-heart"/></svg>Поддержать проект</button>

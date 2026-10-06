@@ -56,6 +56,21 @@ const ICON_BASE = 'https://community.cloudflare.steamstatic.com/economy/image/';
 const iconSrc = (raw) => (/^https?:/.test(raw) ? raw : ICON_BASE + raw);
 
 const MAX_DEALS = 200;
+/** Сколько последних находок показывает живая лента над карточками. */
+const MAX_DROPS = 14;
+
+// Цвет карточки — как редкость предмета в кейсе, только мерило здесь скидка:
+// чем жирнее скидка, тем «реже» цвет. Легенда на странице это объясняет.
+const TIERS = [
+  { min: 30, key: 'gold', label: 'Джекпот' },
+  { min: 20, key: 'red', label: 'Горячо' },
+  { min: 15, key: 'pink', label: null },
+  { min: 10, key: 'purple', label: null },
+  { min: -Infinity, key: 'blue', label: null }
+];
+const tierOf = (deal) => TIERS.find((t) => deal.discountPercent >= t.min);
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---------- состояние ----------
 
@@ -111,6 +126,27 @@ const usd = (v) =>
   Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const signed = (v) => (v >= 0 ? '+' : '') + usd(v);
 const problemsText = (res) => (res.problems || []).join('; ');
+
+/** Цифры докручиваются до нового значения, как счётчик на автомате. */
+function animateNumber(el, to, fmt) {
+  const from = Number(el.dataset.value);
+  el.dataset.value = String(to);
+  cancelAnimationFrame(el._raf);
+  if (reduceMotion || !Number.isFinite(from) || from === to) {
+    el.textContent = fmt(to);
+    return;
+  }
+  const start = performance.now();
+  const duration = 650;
+  const step = (now) => {
+    const k = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = fmt(from + (to - from) * eased);
+    if (k < 1) el._raf = requestAnimationFrame(step);
+  };
+  el._raf = requestAnimationFrame(step);
+}
+const fmtCount = (v) => num(Math.round(v));
 
 function agoText(foundAt) {
   const s = Math.max(0, (Date.now() - Date.parse(foundAt)) / 1000);
@@ -333,8 +369,8 @@ function dealChips(deal) {
 }
 
 function dealCard(deal, { fresh = false } = {}) {
-  const tier = deal.discountPercent >= 20 ? 'hot' : deal.discountPercent >= 12 ? 'good' : '';
-  const el = h('article', { class: 'deal' + (tier ? ' tier-' + tier : '') + (fresh ? ' fresh' : '') });
+  const tier = tierOf(deal);
+  const el = h('article', { class: 'deal t-' + tier.key + (fresh ? ' fresh' : '') });
 
   const ago = h('span', {
     class: 'ago',
@@ -342,9 +378,9 @@ function dealCard(deal, { fresh = false } = {}) {
     title: 'Листингу было ' + fmtAge(deal.ageSeconds) + ' на момент находки',
     text: agoText(deal.foundAt)
   });
-  const hot = tier === 'hot' ? h('span', { class: 'tag hot', text: 'Топ' }) : null;
+  const badge = tier.label ? h('span', { class: 'tag tier', text: tier.label }) : null;
 
-  const info = h('div', null, nameBlock(deal.name, [hot, ago]), dealChips(deal));
+  const info = h('div', null, nameBlock(deal.name, [badge, ago]), dealChips(deal));
 
   const open = h('button', { class: 'btn sm', onclick: () => window.api.openItem(deal.url) }, icon('i-ext'), 'Открыть лот');
 
@@ -401,7 +437,47 @@ function sortedDeals() {
 
 function renderDeals() {
   $('deals').replaceChildren(...sortedDeals().map((d) => dealCard(d)));
+  renderDrops();
   syncEmpty();
+}
+
+/** Плитка живой ленты: картинка, цена и скидка в цвете уровня. */
+function dropTile(deal, isNew) {
+  const tier = tierOf(deal);
+  const tile = h('button', {
+    type: 'button',
+    class: 'drop t-' + tier.key + (isNew ? ' new' : ''),
+    title: deal.name + ' — открыть лот',
+    onclick: () => window.api.openItem(deal.url)
+  });
+  if (deal.iconUrl) {
+    const img = h('img', { alt: '', src: iconSrc(deal.iconUrl) });
+    img.addEventListener('error', () => img.replaceWith(icon(GLYPHS[deal.itemType] || 'g-box')));
+    tile.append(img);
+  } else {
+    tile.append(icon(GLYPHS[deal.itemType] || 'g-box'));
+  }
+  tile.append(
+    h('span', { class: 'drop-price', text: usd(deal.priceUsd) }),
+    h('span', { class: 'drop-disc', text: '−' + Math.round(deal.discountPercent) + '%' }));
+  return tile;
+}
+
+// Лента идёт строго по времени находки, независимо от сортировки карточек.
+function renderDrops() {
+  const box = $('drops');
+  const label = box.firstElementChild;
+  box.replaceChildren(label, ...dealsData.slice(0, MAX_DROPS).map((d) => dropTile(d, false)));
+  box.hidden = dealsData.length === 0;
+  $('legend').hidden = dealsData.length === 0;
+}
+
+function pushDrop(deal) {
+  const box = $('drops');
+  box.firstElementChild.after(dropTile(deal, true));
+  while (box.children.length > MAX_DROPS + 1) box.lastElementChild.remove();
+  box.hidden = false;
+  $('legend').hidden = false;
 }
 
 function addDeal(deal) {
@@ -412,6 +488,7 @@ function addDeal(deal) {
     const list = $('deals');
     list.prepend(dealCard(deal, { fresh: true }));
     while (list.children.length > MAX_DEALS) list.lastElementChild.remove();
+    pushDrop(deal);
     syncEmpty();
   } else {
     renderDeals();
@@ -467,8 +544,8 @@ function syncEmpty() {
 function renderStats(stats) {
   if (!stats) return;
   lastStats = stats;
-  $('statScanned').textContent = num(stats.scanned);
-  $('statMatched').textContent = num(stats.matched);
+  animateNumber($('statScanned'), stats.scanned, fmtCount);
+  animateNumber($('statMatched'), stats.matched, fmtCount);
 
   if (stats.quota) {
     $('statQuota').textContent = num(stats.quota.remaining) + ' / ' + num(stats.quota.limit);
@@ -488,6 +565,7 @@ function syncRunSub() {
 }
 
 function renderRunning(running) {
+  document.body.classList.toggle('is-running', running);
   $('statusDot').classList.toggle('on', running);
   $('statusText').textContent = running ? 'Мониторинг идёт' : 'Остановлен';
 
@@ -890,8 +968,19 @@ function renderSpark(entries) {
 function renderPnl() {
   const s = state.journalStats;
   const realized = $('pnlRealized');
-  realized.textContent = usd(s.realizedUsd);
+  animateNumber(realized, s.realizedUsd, usd);
   realized.className = s.realizedUsd > 0 ? 'positive' : s.realizedUsd < 0 ? 'negative' : '';
+
+  // Лучшая сделка и доля продаж в плюс — считаем по проданным позициям журнала.
+  const profits = state.journal
+    .filter((e) => e.sellPriceUsd !== null && e.sellPriceUsd !== undefined)
+    .map((e) => e.sellPriceUsd - e.buyPriceUsd);
+  const best = $('pnlBest');
+  best.textContent = profits.length > 0 ? signed(Math.max(...profits)) : '—';
+  best.className = profits.length > 0 && Math.max(...profits) > 0 ? 'positive' : '';
+  $('pnlWinrate').textContent = profits.length > 0
+    ? Math.round((profits.filter((p) => p > 0).length / profits.length) * 100) + '%'
+    : '—';
 
   $('pnlPercent').textContent = (s.realizedPercent >= 0 ? '+' : '') + s.realizedPercent.toFixed(1) + '%' +
     (s.soldCount > 0 ? ' по ' + s.soldCount + ' продажам' : '');

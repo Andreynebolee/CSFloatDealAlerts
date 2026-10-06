@@ -44,8 +44,22 @@ if (!window.api) {
       sound: true, openInApp: true, window: { width: 1180, height: 820 }
     },
     running: true,
-    stats: { scanned: 1284, matched: 5, startedAt: Date.now(), lastListingAt: Date.now(), quota: { remaining: 812, limit: 1000, resetUnix: 0 }, delayMs: 8000 },
+    stats: { scanned: 1284, matched: 6, startedAt: Date.now(), lastListingAt: Date.now(), quota: { remaining: 812, limit: 1000, resetUnix: 0 }, delayMs: 8000 },
     deals: [
+      sample({
+        name: '★ Butterfly Knife | Fade (Factory New)',
+        itemType: 'knives',
+        priceUsd: 1384.0,
+        referenceUsd: 2017.5,
+        discountPercent: 31.4,
+        profitUsd: 633.5,
+        floatValue: 0.0094,
+        floatPremiumPercent: 3.1,
+        liquidity: 4,
+        seller: { name: 'fade_master', trades: 2410 },
+        ageSeconds: 4,
+        foundAt: ago(3)
+      }),
       sample({
         name: 'StatTrak™ USP-S | Kill Confirmed (Minimal Wear)',
         itemType: 'pistols',

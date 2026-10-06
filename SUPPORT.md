@@ -1,26 +1,28 @@
 # Поддержать проект
 
-CSFloat Deal Alerts бесплатный. Если приложение помогает вам находить выгодные
-сделки и вы хотите поддержать его развитие — можно отправить любую сумму.
+CSFloat Deal Alerts бесплатный. Если программа вам пригодилась и хочется
+поддержать её развитие, буду рад любой сумме.
 
-## USDT (сеть TRON, TRC-20)
+## USDT, сеть TRON (TRC-20)
 
 ```
 TAujhq16Cu77GZJ9BMtneTWyLYjzQKsWEp
 ```
 
-**Важно:** принимается только **USDT в сети TRON (TRC-20)**. Любая другая монета
-или сеть до адресата не дойдёт, и вернуть такой перевод нельзя. Перед отправкой
-сверьте адрес и сеть; для первого раза можно отправить небольшую сумму.
+Отправляйте только USDT и только в сети TRON (TRC-20). Другая монета или другая
+сеть до меня не дойдёт, и вернуть такой перевод уже не получится. Перед отправкой
+проверьте адрес и сеть, а в первый раз можно скинуть небольшую сумму на пробу.
 
-Все переводы в блокчейне публичны: любой может увидеть поступления на этот адрес.
+Переводы в блокчейне видны всем, так что поступления на этот адрес публичны.
+
+Спасибо!
 
 ---
 
 ## Support the project
 
-CSFloat Deal Alerts is free. If it helps you and you would like to support its
-development, you can send any amount.
+CSFloat Deal Alerts is free. If it has been useful to you and you'd like to
+support it, any amount is appreciated.
 
-**USDT on the TRON network (TRC-20) only** — address above. Funds sent in any other
-coin or network will be lost.
+USDT on the TRON network (TRC-20) only, address above. Anything sent in another
+coin or on another network will be lost.

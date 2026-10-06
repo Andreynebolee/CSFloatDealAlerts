@@ -129,14 +129,14 @@ function createWindow(): void {
     minHeight: 600,
     icon: assetFile('icon.png'),
     title: 'CSFloat Deal Alerts',
-    backgroundColor: '#090b10',
+    backgroundColor: '#0a0712',
     autoHideMenuBar: true,
     // Своя тёмная шапка: системная белая полоса выбивалась из интерфейса.
     // Кнопки окна Windows остаются нативными и рисуются поверх (titleBarOverlay).
     ...(process.platform === 'win32'
       ? {
           titleBarStyle: 'hidden' as const,
-          titleBarOverlay: { color: '#0d1017', symbolColor: '#a6b0c4', height: 40 }
+          titleBarOverlay: { color: '#110b1f', symbolColor: '#bbb2da', height: 40 }
         }
       : {}),
     webPreferences: {

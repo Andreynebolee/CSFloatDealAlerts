@@ -57,7 +57,7 @@ app.whenReady().then(async () => {
     width: WIDTH,
     height: 800,
     show: false,
-    backgroundColor: '#090b10',
+    backgroundColor: '#0a0712',
     webPreferences: { contextIsolation: true, nodeIntegration: false }
   });
 
