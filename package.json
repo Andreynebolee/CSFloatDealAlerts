@@ -1,0 +1,30 @@
+{
+  "name": "csfloat-deal-alerts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desktop-приложение: следит за листингами CSFloat и показывает выгодные сделки карточками",
+  "license": "LicenseRef-PolyForm-Shield-1.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "check": "ts-node app/engine/filter.check.ts && ts-node app/engine/dryrun.check.ts && ts-node app/engine/presets.check.ts && ts-node app/engine/feed.check.ts && ts-node app/engine/atomic.check.ts && ts-node app/main/journal.check.ts && ts-node app/main/autobuy.check.ts && ts-node app/main/telegram.check.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev:engine": "ts-node app/engine/dev-run.ts",
+    "start": "npm run build && electron dist/main/index.js",
+    "dist": "npm run build && electron-builder --win",
+    "pack": "npm run build && electron-builder --win --dir",
+    "clean": "node scripts/clean.cjs",
+    "screenshot": "electron scripts/screenshot.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "main": "dist/main/index.js",
+  "author": "Andreynebolee"
+}

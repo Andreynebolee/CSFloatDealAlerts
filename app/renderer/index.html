@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' https://community.cloudflare.steamstatic.com https://steamcommunity-a.akamaihd.net https://s.csgofloat.com data:; style-src 'self'; script-src 'self'">
+  <title>CSFloat Deal Alerts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Иконки одним спрайтом: никаких внешних файлов и шрифтов. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M16 8l3 3M14 10l2 2"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.5h11L21 7H6.2"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.5 10a1.5 1.5 0 0 0 1.3 2.2h12.4a1.5 1.5 0 0 0 1.3-2.2L14 9V3"/><path d="M7.5 15h9"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-10.7A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 8 2.8c0 5.8-8 10.7-8 10.7z"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4L4 9M4 4v5h5M4 13a8 8 0 0 0 14 4l2-2M20 20v-5h-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.5-7.5L1.5 11z"/><path d="M21 3 9 13.5"/></symbol>
+    <!-- Значки предметов для карточек без картинки -->
+    <symbol id="g-knife" viewBox="0 0 24 24"><path d="M3.5 20.5 5 16 15.5 5.5C17.5 3.5 20 3.2 21 3.2c0 1-.3 3.5-2.3 5.5L8 19.5z"/><path d="m5 16 3 3"/></symbol>
+    <symbol id="g-glove" viewBox="0 0 24 24"><path d="M7 21v-5.5L4.2 11.3a1.5 1.5 0 0 1 2.5-1.7L8 11.5V5a1.5 1.5 0 0 1 3 0v4.5V4a1.5 1.5 0 0 1 3 0v5.5V5a1.5 1.5 0 0 1 3 0v8l1.3-1.6a1.5 1.5 0 0 1 2.3 1.9L18 18c-.8 1.8-1.5 3-3.5 3z"/></symbol>
+    <symbol id="g-gun" viewBox="0 0 24 24"><path d="M2 10.5h11.5l2-2.5H22v4h-4.5L16 15h-3v5h-3.2v-5H2z"/></symbol>
+    <symbol id="g-sticker" viewBox="0 0 24 24"><path d="M5 3h10l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M15 3v5h5"/></symbol>
+    <symbol id="g-music" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+    <symbol id="g-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+  </svg>
+
+  <div class="app">
+    <!-- ============ боковая панель ============ -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-mark"><svg class="ico"><use href="#i-bolt"/></svg></span>
+        <span class="logo-text"><b>CSFloat</b><small>Deal Alerts</small></span>
+      </div>
+
+      <nav class="nav" aria-label="Разделы">
+        <button class="nav-item active" data-tab="alerts" aria-current="page">
+          <svg class="ico"><use href="#i-bolt"/></svg><span class="nav-label">Алерты</span>
+          <em class="nav-badge" id="alertsBadge" hidden>0</em>
+        </button>
+        <button class="nav-item" data-tab="journal">
+          <svg class="ico"><use href="#i-book"/></svg><span class="nav-label">Журнал</span>
+        </button>
+        <button class="nav-item" data-tab="orders">
+          <svg class="ico"><use href="#i-layers"/></svg><span class="nav-label">Ордера</span>
+        </button>
+        <button class="nav-item" data-tab="settings">
+          <svg class="ico"><use href="#i-sliders"/></svg><span class="nav-label">Настройки</span>
+        </button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="run-card" id="runCard">
+          <div class="run-top"><span class="dot" id="statusDot"></span><span id="statusText">Остановлен</span></div>
+          <div class="run-sub" id="runSub">Мониторинг не запущен</div>
+          <button id="toggleBtn" class="btn primary block">
+            <svg class="ico"><use id="toggleIcon" href="#i-play"/></svg><span id="toggleLabel">Запустить</span>
+          </button>
+        </div>
+        <button id="supportBtn" class="support" hidden>
+          <svg class="ico"><use href="#i-heart"/></svg><span class="nav-label">Поддержать проект</span>
+        </button>
+        <div class="version" id="appVersion"></div>
+      </div>
+    </aside>
+
+    <!-- ============ содержимое ============ -->
+    <div class="content">
+      <div class="chrome" aria-hidden="true"></div>
+
+      <div id="banner" class="banner" hidden role="alert">
+        <span id="bannerText"></span>
+        <button id="bannerClose" class="icon-btn" aria-label="Скрыть"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+
+      <main class="scroll" id="scroll">
+
+        <!-- ---------- Алерты ---------- -->
+        <section id="tab-alerts" class="tab-panel active">
+          <div class="page">
+            <header class="page-head">
+              <div>
+                <h1>Алерты</h1>
+                <p class="sub">Выгодные листинги CSFloat — как только они появляются</p>
+              </div>
+              <div class="seg" role="group" aria-label="Сортировка">
+                <button class="seg-btn active" data-sort="new">Новые</button>
+                <button class="seg-btn" data-sort="discount">Скидка</button>
+                <button class="seg-btn" data-sort="profit">Выгода</button>
+              </div>
+            </header>
+
+            <div class="kpis">
+              <div class="kpi">
+                <span class="kpi-label">Просканировано</span>
+                <b id="statScanned">0</b>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Найдено сделок</span>
+                <b id="statMatched" class="accent-text">0</b>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Квота API</span>
+                <b id="statQuota">—</b>
+                <div class="meter"><i id="quotaFill"></i></div>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Пауза опроса</span>
+                <b id="statDelay">—</b>
+              </div>
+            </div>
+
+            <div id="dealsEmpty" class="empty-state">
+              <div class="radar" id="emptyArt"><i></i><i></i><i></i><svg class="ico"><use href="#i-bolt"/></svg></div>
+              <h2 id="emptyTitle">Пока пусто</h2>
+              <p id="emptyText"></p>
+              <div class="empty-actions"><button id="emptyAction" class="btn primary" hidden></button></div>
+              <ol class="steps" id="emptySteps">
+                <li data-step="key"><span class="step-n">1</span><span>Вставьте API-ключ CSFloat</span></li>
+                <li data-step="filters"><span class="step-n">2</span><span>Выберите пресет или настройте фильтры</span></li>
+                <li data-step="run"><span class="step-n">3</span><span>Нажмите «Запустить» — карточки появятся здесь</span></li>
+              </ol>
+            </div>
+
+            <div id="deals" class="deals"></div>
+          </div>
+        </section>
+
+        <!-- ---------- Журнал ---------- -->
+        <section id="tab-journal" class="tab-panel">
+          <div class="page">
+            <header class="page-head">
+              <div>
+                <h1>Журнал</h1>
+                <p class="sub">Покупки, продажи и реальная прибыль</p>
+              </div>
+              <div class="head-actions">
+                <button id="addManualBtn" class="btn"><svg class="ico"><use href="#i-plus"/></svg>Добавить вручную</button>
+                <button id="exportBtn" class="btn"><svg class="ico"><use href="#i-download"/></svg>CSV</button>
+              </div>
+            </header>
+
+            <div class="pnl">
+              <div class="pnl-hero">
+                <span class="pnl-label">Реализованная прибыль</span>
+                <b id="pnlRealized">$0.00</b>
+                <span class="pnl-sub" id="pnlPercent">0%</span>
+              </div>
+              <svg class="spark" id="pnlSpark" viewBox="0 0 220 64" preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="pnl-grid">
+                <div class="pnl-cell"><span>Вложено всего</span><b id="pnlInvested">$0.00</b></div>
+                <div class="pnl-cell"><span>В портфеле</span><b id="pnlHolding">$0.00</b></div>
+                <div class="pnl-cell"><span>Выручка</span><b id="pnlRevenue">$0.00</b></div>
+                <div class="pnl-cell"><span>Позиций</span><b id="pnlCount">0</b></div>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <div class="seg" role="group" aria-label="Фильтр журнала">
+                <button class="seg-btn active" data-filter="all">Все</button>
+                <button class="seg-btn" data-filter="open">В портфеле</button>
+                <button class="seg-btn" data-filter="sold">Проданные</button>
+              </div>
+            </div>
+
+            <form id="manualForm" class="card" hidden>
+              <h2>Своя позиция</h2>
+              <div class="grid2">
+                <label class="lbl">Предмет<input type="text" id="manualName" placeholder="AK-47 | Redline (Field-Tested)" required></label>
+                <label class="lbl">Цена покупки, $<input type="number" id="manualPrice" min="0" step="0.01" required></label>
+              </div>
+              <div class="row">
+                <button type="submit" class="btn primary">Добавить</button>
+                <button type="button" id="manualCancel" class="btn">Отмена</button>
+              </div>
+            </form>
+
+            <div id="journalEmpty" class="empty-state compact">
+              <div class="empty-icon"><svg class="ico"><use href="#i-book"/></svg></div>
+              <h2 id="journalEmptyTitle">Журнал пуст</h2>
+              <p id="journalEmptyText">Нажмите «Куплено» на карточке алерта — позиция попадёт сюда и начнёт считаться в прибыль.</p>
+            </div>
+            <div id="journalList" class="list"></div>
+          </div>
+        </section>
+
+        <!-- ---------- Ордера ---------- -->
+        <section id="tab-orders" class="tab-panel">
+          <div class="page">
+            <header class="page-head">
+              <div>
+                <h1>Ордера</h1>
+                <p class="sub">Активные buy order на CSFloat и расход автопокупки</p>
+              </div>
+              <div class="head-actions">
+                <button id="refreshOrdersBtn" class="btn"><svg class="ico"><use href="#i-refresh"/></svg>Обновить</button>
+              </div>
+            </header>
+
+            <div class="spend">
+              <div class="spend-top">
+                <div>
+                  <span class="kpi-label">Потрачено за сутки</span>
+                  <div class="spend-num"><b id="spentToday">—</b><span class="muted" id="spentLimit"></span></div>
+                </div>
+                <span class="muted spend-note">Лимит обнуляется в полночь</span>
+              </div>
+              <div class="meter big"><i id="spentFill"></i></div>
+            </div>
+
+            <div id="ordersEmpty" class="empty-state compact">
+              <div class="empty-icon"><svg class="ico"><use href="#i-layers"/></svg></div>
+              <h2>Активных ордеров нет</h2>
+              <p>Ордер ставится автоматически, если включена автопокупка в режиме «Ставить buy order».</p>
+            </div>
+            <div id="ordersList" class="list"></div>
+          </div>
+        </section>
+
+        <!-- ---------- Настройки ---------- -->
+        <section id="tab-settings" class="tab-panel">
+          <div class="page">
+            <header class="page-head">
+              <div>
+                <h1>Настройки</h1>
+                <p class="sub">Что искать, как покупать и как сообщать о находках</p>
+              </div>
+            </header>
+
+            <div class="settings-layout">
+              <nav class="subnav" aria-label="Разделы настроек">
+                <button class="subnav-item active" data-pane="connection"><svg class="ico"><use href="#i-key"/></svg><span>Подключение</span></button>
+                <button class="subnav-item" data-pane="filters"><svg class="ico"><use href="#i-filter"/></svg><span>Фильтры</span></button>
+                <button class="subnav-item" data-pane="autobuy"><svg class="ico"><use href="#i-cart"/></svg><span>Автопокупка</span></button>
+                <button class="subnav-item" data-pane="notify"><svg class="ico"><use href="#i-bell"/></svg><span>Уведомления</span></button>
+                <button class="subnav-item" data-pane="app"><svg class="ico"><use href="#i-monitor"/></svg><span>Приложение</span></button>
+                <button class="subnav-item" data-pane="dry"><svg class="ico"><use href="#i-flask"/></svg><span>Проверка</span></button>
+              </nav>
+
+              <div class="settings-body">
+
+                <!-- Подключение -->
+                <div class="pane active" id="pane-connection">
+                  <div class="card">
+                    <h2>API-ключ CSFloat</h2>
+                    <p class="hint">csfloat.com → Profile → Developer → New Key. Ключ хранится только на этом компьютере и шифруется средствами Windows.</p>
+                    <div class="row">
+                      <input type="password" id="apiKey" placeholder="вставьте ключ" autocomplete="off" data-nodirty>
+                      <button id="saveKeyBtn" class="btn primary">Сохранить</button>
+                    </div>
+                    <p class="key-state" id="keyState"></p>
+                  </div>
+
+                  <div class="card">
+                    <h2>Частота опроса</h2>
+                    <div class="field" data-range="pollSec" data-label="Пауза между запросами" data-min="2" data-max="60" data-step="1" data-unit="сек"></div>
+                    <div class="field" data-range="pollLimit" data-label="Листингов за запрос" data-min="10" data-max="50" data-step="5" data-unit="шт"></div>
+                    <p class="hint warn-text">Меньше 5 секунд с одного домашнего IP — прямой путь к 429 и потере ключа.</p>
+                  </div>
+                </div>
+
+                <!-- Фильтры -->
+                <div class="pane" id="pane-filters">
+                  <div class="card">
+                    <h2>Пресеты</h2>
+                    <p class="hint">Готовый набор фильтров в один клик. Применение заменит поля ниже — сохраните свои, если они нужны.</p>
+                    <div class="preset-grid" id="presetGrid"></div>
+                    <div class="row preset-save">
+                      <input type="text" id="presetName" placeholder="имя своего пресета" maxlength="50" data-nodirty>
+                      <button id="savePresetBtn" class="btn">Сохранить текущие</button>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <h2>Цена</h2>
+                    <div class="field" data-range="minPrice" data-label="От" data-min="0" data-max="1000" data-step="1" data-unit="$"></div>
+                    <div class="field" data-range="maxPrice" data-label="До" data-min="1" data-max="5000" data-step="1" data-unit="$"></div>
+                  </div>
+
+                  <div class="card">
+                    <h2>Выгода</h2>
+                    <div class="field" data-range="minDiscount" data-label="Мин. скидка к оценке CSFloat" data-min="0" data-max="60" data-step="1" data-unit="%"></div>
+                    <div class="field" data-range="minProfit" data-label="Мин. абсолютная выгода" data-min="0" data-max="100" data-step="0.5" data-unit="$"></div>
+                    <p class="hint">0 = фильтр выключен. Скидка считается от оценки CSFloat с учётом float, а если её нет — от цены Steam.</p>
+                  </div>
+
+                  <div class="card">
+                    <h2>Листинг</h2>
+                    <div class="field" data-range="maxAge" data-label="Макс. возраст листинга" data-min="1" data-max="60" data-step="1" data-unit="мин"></div>
+                    <div class="field" data-range="minTrades" data-label="Мин. трейдов у продавца" data-min="0" data-max="500" data-step="1" data-unit=""></div>
+                    <div class="field" data-range="minLiquidity" data-label="Мин. ликвидность" data-min="0" data-max="200" data-step="1" data-unit="в день"></div>
+                    <p class="hint">Ликвидность — сколько таких предметов продаётся в сутки. Дешёвая находка без спроса деньгами не станет.</p>
+                  </div>
+
+                  <div class="card">
+                    <h2>Переплата</h2>
+                    <div class="field" data-range="maxFloatPremium" data-label="Макс. премия за float" data-min="0" data-max="50" data-step="1" data-unit="%"></div>
+                    <div class="field" data-range="stickerStrictness" data-label="Строгость по наклейкам" data-min="0" data-max="3" data-step="0.1" data-unit="×"></div>
+                    <p class="hint">Строгость — во сколько раз цена наклеек может превышать справедливую надбавку. 1.0 — стандартно, 0 — не проверять.</p>
+                  </div>
+
+                  <div class="card">
+                    <h2>Типы предметов</h2>
+                    <div class="types" id="types"></div>
+                  </div>
+
+                  <div class="card">
+                    <h2>Один предмет</h2>
+                    <p class="hint">Если заполнить — приложение следит только за ним. Точное market_hash_name, например «AK-47 | Redline (Field-Tested)».</p>
+                    <input type="text" id="accent" placeholder="пусто = следить за всем рынком">
+                  </div>
+
+                  <div class="callout">
+                    <svg class="ico"><use href="#i-flask"/></svg>
+                    <span>Не уверены в настройках? Прогоните их по истории листингов — ничего не покупается.</span>
+                    <button class="btn" id="goDryBtn" data-nodirty>Проверить на истории</button>
+                  </div>
+                </div>
+
+                <!-- Автопокупка -->
+                <div class="pane" id="pane-autobuy">
+                  <div class="card danger-card">
+                    <h2>Автопокупка</h2>
+                    <p class="hint">По найденной сделке приложение покупает вашим ключом CSFloat, не дожидаясь вас.</p>
+                    <p class="warn-text hint"><b>Тратит реальные деньги с вашего баланса CSFloat.</b>
+                    Сначала проверьте настройки на истории — раздел «Проверка».</p>
+
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Включить автопокупку</b></span>
+                      <input type="checkbox" class="switch" id="autoBuyEnabled">
+                    </label>
+
+                    <div class="modes">
+                      <label class="mode">
+                        <input type="radio" name="autoBuyMode" value="direct" checked>
+                        <div>
+                          <b>Выкупать этот лот</b>
+                          <span>Покупает именно тот предмет, что пришёл в алерте, — за секунды,
+                          пока его не забрали. Использует недокументированный эндпоинт CSFloat: работает
+                          сейчас, но может отвалиться без предупреждения.</span>
+                        </div>
+                      </label>
+                      <label class="mode">
+                        <input type="radio" name="autoBuyMode" value="order">
+                        <div>
+                          <b>Ставить buy order</b>
+                          <span>Не покупает лот из алерта, а оставляет на CSFloat заявку
+                          «куплю такое за столько». Сработает на следующем подходящем предмете.
+                          То же самое можно сделать руками на сайте — здесь это просто автоматизировано.
+                          Зато эндпоинт документированный и не сломается.</span>
+                        </div>
+                      </label>
+                    </div>
+
+                    <label class="switch-row">
+                      <span class="sw-text">
+                        <b>Спрашивать подтверждение перед каждой покупкой</b>
+                        <small>При выкупе лота подтверждение почти всегда означает, что предмет успеют забрать: окно висит секунды, а лот живёт столько же.</small>
+                      </span>
+                      <input type="checkbox" class="switch" id="autoBuyConfirm">
+                    </label>
+                  </div>
+
+                  <div class="card">
+                    <h2>Лимиты</h2>
+                    <div class="field" data-range="autoBuyMaxOrder" data-label="Потолок на одну покупку" data-min="1" data-max="500" data-step="1" data-unit="$"></div>
+                    <div class="field" data-range="autoBuyDaily" data-label="Лимит трат в сутки" data-min="1" data-max="2000" data-step="10" data-unit="$"></div>
+                    <p class="hint">Лимит обнуляется в полночь. Повторный ордер по тому же предмету не ставится 30 минут.</p>
+                  </div>
+                </div>
+
+                <!-- Уведомления -->
+                <div class="pane" id="pane-notify">
+                  <div class="card">
+                    <h2>На этом компьютере</h2>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Системные уведомления</b><small>Клик по уведомлению открывает лот.</small></span>
+                      <input type="checkbox" class="switch" id="prefNotifications">
+                    </label>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Звук</b></span>
+                      <input type="checkbox" class="switch" id="prefSound">
+                    </label>
+                  </div>
+
+                  <div class="card">
+                    <h2>Дублировать в Telegram</h2>
+                    <p class="hint">Не обязательно. Пригодится, когда компьютер дома, а вы — нет.</p>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Включить</b></span>
+                      <input type="checkbox" class="switch" id="tgEnabled">
+                    </label>
+                    <div class="grid2">
+                      <label class="lbl">Токен бота<input type="password" id="tgToken" placeholder="от @BotFather" autocomplete="off"></label>
+                      <label class="lbl">Chat ID<input type="text" id="tgChat" placeholder="ваш id или @канал"></label>
+                    </div>
+                    <div class="row">
+                      <button id="tgTestBtn" class="btn" data-nodirty><svg class="ico"><use href="#i-send"/></svg><span>Отправить тест</span></button>
+                      <span class="hint" id="tgTestState"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Приложение -->
+                <div class="pane" id="pane-app">
+                  <div class="card">
+                    <h2>Окно и запуск</h2>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Открывать лот внутри приложения</b><small>Вход на CSFloat сохраняется, покупка — в один клик.</small></span>
+                      <input type="checkbox" class="switch" id="prefOpenInApp">
+                    </label>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Крестик сворачивает в трей</b><small>Мониторинг продолжает работать в фоне.</small></span>
+                      <input type="checkbox" class="switch" id="prefTray">
+                    </label>
+                    <label class="switch-row">
+                      <span class="sw-text"><b>Запускать вместе с Windows</b></span>
+                      <input type="checkbox" class="switch" id="prefAutoStart">
+                    </label>
+                  </div>
+
+                  <div class="card about">
+                    <h2>О проекте</h2>
+                    <p class="hint">CSFloat Deal Alerts — бесплатное приложение. Работает локально: ключ CSFloat уходит только на CSFloat, а токен бота — только в Telegram, и только если вы включили дубль.</p>
+                    <div class="about-row">
+                      <span class="muted" id="aboutVersion"></span>
+                      <button id="aboutSupportBtn" class="btn" hidden><svg class="ico"><use href="#i-heart"/></svg>Поддержать проект</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Проверка на истории -->
+                <div class="pane" id="pane-dry">
+                  <div class="card">
+                    <h2>Проверка на истории</h2>
+                    <p class="hint">Прогоняет текущие поля формы по недавним листингам и показывает, что бы они поймали. Ничего не покупает и не сохраняет.</p>
+                    <div class="row">
+                      <select id="dryWindow" data-nodirty>
+                        <option value="30">за 30 минут</option>
+                        <option value="60" selected>за час</option>
+                        <option value="180">за 3 часа</option>
+                      </select>
+                      <button id="dryRunBtn" class="btn primary" data-nodirty><svg class="ico"><use href="#i-flask"/></svg><span>Проверить</span></button>
+                    </div>
+                    <p class="hint" id="dryProgress" hidden></p>
+                  </div>
+
+                  <div id="dryResult" hidden>
+                    <div class="kpis three">
+                      <div class="kpi"><span class="kpi-label">Просмотрено</span><b id="dryScanned">0</b></div>
+                      <div class="kpi"><span class="kpi-label">Прошло фильтр</span><b id="dryMatched" class="accent-text">0</b></div>
+                      <div class="kpi"><span class="kpi-label">Минут покрыто</span><b id="dryCovered">0</b></div>
+                    </div>
+                    <p class="hint" id="dryNote" hidden></p>
+
+                    <div class="card">
+                      <h2>Что отсеялось</h2>
+                      <div id="dryBuckets" class="buckets"></div>
+                    </div>
+
+                    <h3 class="sub-title" id="dryDealsTitle" hidden>Что поймали бы</h3>
+                    <div id="dryDeals" class="deals compact"></div>
+                  </div>
+                </div>
+
+                <div class="savebar" id="saveBar">
+                  <span class="save-state" id="saveState"><i></i><span id="saveStateText">Все изменения сохранены</span></span>
+                  <button id="saveBtn" class="btn primary">Сохранить настройки</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="dev-mock.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

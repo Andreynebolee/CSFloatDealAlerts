@@ -1,0 +1,44 @@
+appId: com.csfloat.dealalerts
+productName: CSFloat Deal Alerts
+copyright: Copyright 2026 Andreynebolee
+
+directories:
+  output: release
+  buildResources: app/assets
+
+# В пакет кладём только то, что нужно приложению: собранный main/engine,
+# рендерер и иконки. legacy/, web/, scripts/ и исходники TypeScript — мимо.
+files:
+  - dist/**/*
+  - app/renderer/**/*
+  - app/assets/**/*
+  - package.json
+  - '!**/*.map'
+  - '!dist/**/*.check.js'
+  - '!dist/engine/dev-run.js'
+  # dev-mock.js остаётся: он инертен, когда preload объявил window.api,
+  # а без него index.html ловил бы 404 на скрипт.
+
+asar: true
+
+win:
+  icon: app/assets/icon.png
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: CSFloat Deal Alerts
+  # Данные (ключ, настройки, журнал) живут в %APPDATA% и при удалении
+  # приложения не трогаются — иначе снос ради переустановки стирает журнал.
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}
